@@ -7,6 +7,6 @@ public class PolyDataExtractor {
 		
 		System.exit(0);
 	}
-	public 
+	
 
 }
