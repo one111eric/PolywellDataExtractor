@@ -1,5 +1,7 @@
 package PolywellDataExtractor;
 
+
+
 public interface PolyProdPage {
-	public void getData();
+	public void getData() throws InterruptedException;
 }

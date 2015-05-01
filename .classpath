@@ -41,5 +41,6 @@
 	<classpathentry kind="lib" path="C:/Users/user/Downloads/selenium-java-2.45.0/selenium-2.45.0/libs/xml-apis-1.4.01.jar"/>
 	<classpathentry kind="lib" path="C:/Users/user/Downloads/selenium-java-2.45.0/selenium-2.45.0/selenium-java-2.45.0.jar"/>
 	<classpathentry kind="lib" path="C:/Users/user/Downloads/selenium-java-2.45.0/selenium-2.45.0/selenium-java-2.45.0-srcs.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user/Downloads/poi-bin-3.11-20141221/poi-3.11/poi-3.11-20141221.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
