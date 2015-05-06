@@ -2,7 +2,7 @@ package PolywellDataExtractor;
 
 
 
-public class PageCases extends TestCases {
+public class PageCases implements TestCases {
 
 	private double CaseId;
 	private String ModelName;
@@ -13,7 +13,7 @@ public class PageCases extends TestCases {
 		this.CaseId=caseid;
 		this.ModelName=modelname;
 		this.ModelURL=modelurl;
-		if(completed.toUpperCase()=="Yes")
+		if(completed.contains("Yes"))
 		{
 			this.Completed=true;
 			}
@@ -22,5 +22,21 @@ public class PageCases extends TestCases {
 			this.Completed=false;
 		}
 		
+	}
+	public double getCaseId()
+	{
+		return this.CaseId;
+	}
+	public String getModelName()
+	{
+		return this.ModelName;
+	}
+	public String getModelURL()
+	{
+		return this.ModelURL;
+	}
+	public boolean getCompleted()
+	{
+		return this.Completed;
 	}
 }

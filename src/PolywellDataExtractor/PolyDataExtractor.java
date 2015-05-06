@@ -1,10 +1,26 @@
 package PolywellDataExtractor;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class PolyDataExtractor {
 
 	public static void main(String[] args) throws InterruptedException {
-		PolyITXPage page1=new PolyITXPage("http://polywell.com/us/oem/i1000A8-2.asp","i1000A8-2","C:\\Users\\user\\Desktop\\Miao's work\\20150430\\spec.xls");
-		page1.getData();
-		
+		List<TestCases> cases=new ArrayList<TestCases>();
+		cases=ExcelDataReader.readData("C:\\Users\\user\\Desktop\\cases.xls");
+		int num=cases.size();
+		for(int i=0;i<num;i++)
+		{
+			if(cases.get(i).getCompleted()==false)
+			{
+				PageCases pagecase=(PageCases)cases.get(i);
+				PolyITXPage page=new PolyITXPage(pagecase.getModelURL(),pagecase.getModelName(),"C:\\Users\\user\\Desktop\\Miao's work\\20150430\\spec.xls");
+				page.getData();
+				
+			}
+			
+		}
+		System.out.println("Finished!");
 		System.exit(0);
 	}
 	

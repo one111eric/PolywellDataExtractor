@@ -1,5 +1,6 @@
 package PolywellDataExtractor;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.List;
 
@@ -36,7 +37,8 @@ public class PolyITXPage implements PolyProdPage{
    		wd.manage().window().setSize(new Dimension(1024,768));
    		wd.get(this.URL);
    		Thread.sleep(1000);
-   		WebElement SpecBtn=wd.findElement(By.xpath("//li[@class='TabbedPanelsTab' and contains(.,'Specifications')]"));
+   		WebElement SpecBtn=wd.findElement(By.xpath("//li[contains(@class,'TabbedPanelsTab') and contains(text(),'Specifications')]"));
+   		// //li[@class='TabbedPanelsTab' and contains(.,'Specifications')]
    		if(SpecBtn.isDisplayed())
    		{
    			//System.out.println("clicking on spec");
@@ -46,7 +48,23 @@ public class PolyITXPage implements PolyProdPage{
    		WebElement SpecDiv=wd.findElement(By.xpath("//div[@class='TabbedPanelsContent TabbedPanelsContentVisible']"));
    		WebElement SpecTable=SpecDiv.findElement(By.tagName("table"));
    		List<WebElement> SpecRows=SpecTable.findElements(By.tagName("tr"));
-   		HSSFWorkbook workbook=new HSSFWorkbook();
+   		File file=new File(FileLocation);
+   		HSSFWorkbook workbook=null;
+   		if(file.exists())
+   		{
+   			try{
+   			FileInputStream in=new FileInputStream(new File(FileLocation));
+		    workbook=new HSSFWorkbook(in);
+   			}
+   			catch(Exception e){
+   				
+   				e.printStackTrace();
+   			}
+		}
+   		else
+   			{
+   			workbook=new HSSFWorkbook();
+   			}
    		HSSFSheet sheet=workbook.createSheet(ModelName);
    		int RowCount=0;   		
    		for(WebElement tr:SpecRows)
@@ -67,6 +85,7 @@ public class PolyITXPage implements PolyProdPage{
    			}
    		}
    		try{
+   			
    			FileOutputStream out=new FileOutputStream(new File(FileLocation));
    			workbook.write(out);
    			out.close();
@@ -76,6 +95,7 @@ public class PolyITXPage implements PolyProdPage{
    		catch(Exception e){
    			e.printStackTrace();
    		}
+   		
 		wd.close();
 		
 	}

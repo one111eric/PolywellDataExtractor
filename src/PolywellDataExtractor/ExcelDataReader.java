@@ -11,15 +11,16 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 public class ExcelDataReader {
-    public static List<Object> readData(String FileLocation)
+    public static List<TestCases> readData(String FileLocation)
     {
-    	List<Object> pagecases=new ArrayList<Object>();
+    	List<TestCases> pagecases=new ArrayList<TestCases>();
     	try {
 			FileInputStream in=new FileInputStream(new File(FileLocation));
 			HSSFWorkbook workbook=new HSSFWorkbook(in);
 			HSSFSheet sheet=workbook.getSheetAt(0);
 			Iterator<Row> rowIterator = sheet.iterator();
-            while(rowIterator.hasNext()) {
+			rowIterator.next();
+			while(rowIterator.hasNext()) {
                 Row row = rowIterator.next();
                              
                     double id=row.getCell(0).getNumericCellValue();
@@ -28,7 +29,8 @@ public class ExcelDataReader {
                     String completed=row.getCell(3).getStringCellValue();
                     PageCases pagecase=new PageCases(id,modelname,url,completed);
                     pagecases.add(pagecase);                  
-             }                               		
+             }    
+			workbook.close();
     	}			
        
     	catch (IOException e) {
