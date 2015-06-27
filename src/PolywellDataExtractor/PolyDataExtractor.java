@@ -7,7 +7,7 @@ public class PolyDataExtractor {
 
 	public static void main(String[] args) throws InterruptedException {
 		List<TestCases> cases=new ArrayList<TestCases>();
-		cases=ExcelDataReader.readData("C:\\Users\\user\\Desktop\\cases.xls");
+/*		cases=ExcelDataReader.readData("C:\\Users\\user\\Desktop\\cases.xls");
 		int num=cases.size();
 		for(int i=0;i<num;i++)
 		{
@@ -20,6 +20,22 @@ public class PolyDataExtractor {
 			}
 			
 		}
+*/
+		cases=ExcelDataReader.readData("C:\\Users\\user\\Desktop\\Cases-storage.xls");
+		int num=cases.size();
+		for(int i=0;i<num;i++)
+		{
+			if(cases.get(i).getCompleted()==false)
+			{
+				PageCases pagecase=(PageCases)cases.get(i);
+				PolyStoragePage page=new PolyStoragePage(pagecase.getModelURL(),pagecase.getModelName(),"C:\\Users\\user\\Desktop\\Miao's work\\20150626\\Storage-spec.xls");
+				page.getData();
+				//PolyITXPage page=new PolyITXPage(pagecase.getModelURL(),pagecase.getModelName(),"C:\\Users\\user\\Desktop\\Miao's work\\20150626\\Storage-spec.xls");
+				//page.getData();
+			}
+			
+		}
+		
 		System.out.println("Finished!");
 		System.exit(0);
 	}
