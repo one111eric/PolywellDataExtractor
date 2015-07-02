@@ -16,15 +16,15 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class PolyStoragePage implements PolyProdPage{
-	public PolyStoragePage(String url,String modelname,String fileloc)
+public class PolyServerPage implements PolyProdPage{
+	public PolyServerPage(String url,String modelname,String fileloc)
 	{
 		this.URL=url;
 		this.ModelName=modelname;
 		this.FileLocation=fileloc;
 		
 	}
-
+	
 	@Override
 	public void getData() throws InterruptedException {
 		// TODO Auto-generated method stub
@@ -33,7 +33,18 @@ public class PolyStoragePage implements PolyProdPage{
    		wd.manage().window().setSize(new Dimension(1024,768));
    		wd.get(this.URL);
    		Thread.sleep(1000);
-   		WebElement SpecTable=wd.findElement(By.xpath("//font[contains(text(),'Specifications')]/../../../../../../../../../../table[2]"));
+   		//WebElement SpecTable=wd.findElement(By.xpath("//font[contains(text(),'Specifications')]/../../../../../../../../../../table[5]"));
+   		//WebElement SpecTable=wd.findElement(By.xpath("//font[contains(text(),'Specifications')]/../../../../../../../../../../../table[5]"));
+   		WebElement SpecBtn=wd.findElement(By.xpath("//li[contains(@class,'TabbedPanelsTab') and contains(text(),'Specifications')]"));
+   		// //li[@class='TabbedPanelsTab' and contains(.,'Specifications')]
+   		if(SpecBtn.isDisplayed())
+   		{
+   			//System.out.println("clicking on spec");
+   			SpecBtn.click();
+   		}
+   		Thread.sleep(1000);
+   		WebElement SpecDiv=wd.findElement(By.xpath("//div[@class='TabbedPanelsContent TabbedPanelsContentVisible']"));
+   		WebElement SpecTable=SpecDiv.findElement(By.tagName("table"));
    		
    		List<WebElement> SpecRows=SpecTable.findElements(By.tagName("tr"));
    		File file=new File(FileLocation);
@@ -85,9 +96,7 @@ public class PolyStoragePage implements PolyProdPage{
    		}
    		
 		wd.close();
-   		
 	}
-	
 	private String URL;
 	private String ModelName;
 	private String FileLocation;

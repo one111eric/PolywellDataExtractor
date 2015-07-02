@@ -21,6 +21,7 @@ public class PolyDataExtractor {
 			
 		}
 */
+		/*
 		cases=ExcelDataReader.readData("C:\\Users\\user\\Desktop\\Cases-storage.xls");
 		int num=cases.size();
 		for(int i=0;i<num;i++)
@@ -35,7 +36,21 @@ public class PolyDataExtractor {
 			}
 			
 		}
-		
+		*/
+		cases=ExcelDataReader.readData("C:\\Users\\user\\Desktop\\Cases-server.xls");
+		int num=cases.size();
+		for(int i=0;i<num;i++)
+		{
+			if(cases.get(i).getCompleted()==false)
+			{
+				PageCases pagecase=(PageCases)cases.get(i);
+				PolyServerPage page=new PolyServerPage(pagecase.getModelURL(),pagecase.getModelName(),"C:\\Users\\user\\Desktop\\Miao's work\\20150701\\Storage-spec.xls");
+				page.getData();
+				//PolyITXPage page=new PolyITXPage(pagecase.getModelURL(),pagecase.getModelName(),"C:\\Users\\user\\Desktop\\Miao's work\\20150626\\Storage-spec.xls");
+				//page.getData();
+			}
+			
+		}
 		System.out.println("Finished!");
 		System.exit(0);
 	}
